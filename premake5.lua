@@ -19,7 +19,12 @@ project "GLFW"
     }
     
     filter "system:linux"
-        buildoptions { "-std=c11", "-fPIC" }
+
+        -- buildoptions
+        -- {
+        --     "-Wall",
+        --     "-Wextra"
+        -- }
         
         files
         {
@@ -38,4 +43,15 @@ project "GLFW"
         defines 
         { 
             "_GLFW_X11",
+        }
+
+    filter "configurations:Debug"
+        symbols "on"
+
+    filter "configurations:Release"
+        optimize "speed"
+
+        linkoptions
+        {
+            "-flto"
         }
